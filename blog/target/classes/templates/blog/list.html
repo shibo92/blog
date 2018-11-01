@@ -1,0 +1,84 @@
+<!DOCTYPE HTML >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="public/header :: include ('list')"></div>
+</head>
+<body>
+<!-- Wrapper -->
+<div class="wrapper style1">
+    <div th:replace="public/header :: header"></div>
+    <div th:replace="public/banner :: banner"></div>
+    <!-- Extra -->
+    <div id="extra">
+        <div class="container">
+            <div class="row no-collapse-1 masonry" style="margin-left: -10px;">
+                <section class="blog-container item" style="padding: 5px;"
+                         th:if="null != blogs" th:each="blog:${blogs.content}">
+                        <a th:href="@{'/blogs/'+${blog.id}}" class="image featured">
+                            <img class="content" src="/images/pic04.jpg" alt="">
+                        </a>
+                        <div class="box blog-box">
+                            <h3 class="title" th:text="${blog.title}"></h3>
+                            <p class="content" style="line-height: 1.3em" th:utext="${#strings.abbreviate(blog.plainContent,50)}"></p>
+                            <a th:href="@{'/blogs/'+${blog.id}}" class="more button">Read More</a>
+                        </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="public/copyright :: copyright"></div>
+<input type="hidden" class="current-page" th:value="${blogs.number}">
+<input type="hidden" class="is-last" th:value="${blogs.last}">
+</body>
+<script type="text/javascript">
+    let startRequest = false;
+    $(function () {
+        /**
+         * 滚动加载数据
+         **/
+        $(window).scroll(function () {
+            let isLast = $(".is-last").val();
+            if (isLast === "false") {
+                let totalHeight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+                if ($(document).height() <= totalHeight + 120) {
+                    if (startRequest === false) {
+                        // 开始请求数据时，不再重复进入getBlogs方法请求
+                        startRequest = true;
+                        getBlogs();
+                    }
+                }
+            }
+        });
+    });
+
+    function getBlogs() {
+        let url = '/blogs/doList';
+        let nextPage = parseInt($('.current-page').val()) + 1;
+        let keyword = $('input[name="keyword"]').val();
+        let requestData = {'page': nextPage, 'keyword': keyword};
+        $.get(url, requestData, function (res) {
+            if (res.code === '00') {
+                let data = res.data.content;
+                data.forEach((item, index) => {
+                    // 停止请求数据
+                    startRequest = false;
+                    let templateHtml =
+                        '<section class="blog-container item" style="padding: 5px;">' +
+                        '    <a href="/blogs/' + item.id + '" class="image featured"><img class="content" src="/images/pic04.jpg" alt=""></a>' +
+                        '    <div class="box blog-box" >' +
+                        '        <h3 class="title">' + item.title + '</h3>' +
+                        '        <p class="content" style="line-height: 1.3em">' + item.plainContent.substring(0,50) + '</p>' +
+                        '        <a href="/blogs/' + item.id + '" class="more button">Read More</a>' +
+                        '    </div>' +
+                        '</section>';
+                    $("#extra .container .row").append(templateHtml);
+                    // 更新页码
+                    $(".current-page").val(res.data.number);
+                    $(".is-last").val(res.data.last);
+                });
+            }
+        });
+    }
+</script>
+</html>

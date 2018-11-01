@@ -9,7 +9,7 @@ spring:
       server:
         git:
           uri: https://github.com/shibo92/blog.git
-          searchPaths: conf
+          search-paths: config-repo/conf
           force-pull: true
 
 eureka:

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: comment
+  cloud:
+    config:
+      profile: dev
+      discovery:
+        enabled: true
+        serviceId: config-server

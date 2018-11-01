@@ -1,14 +1,18 @@
 server:
   port: 8082
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-
 spring:
+  application:
+    name: config-server
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/shibo92/spring-cloud-blog/tree/master/config-repo/conf
+          uri: https://github.com/shibo92/blog.git
+          searchPaths: conf
+          force-pull: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

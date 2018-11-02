@@ -6,6 +6,7 @@ spring:
       discovery:
         enabled: true #开启Config服务发现支持
         service-id: config-server #config server端的application name
+
 ---
 
 spring:

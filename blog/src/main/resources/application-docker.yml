@@ -1,21 +1,6 @@
-server:
-  port: 8080
 spring:
-  profiles: docker
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://mysql:3306/newblog
     username: root
     password: root
-  #thymelea模板配置
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML5
-    encoding: utf-8
-    content-type: text/html
-    cache: false

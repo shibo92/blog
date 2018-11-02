@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="public/header :: include ('edit')"></div>
+    <link rel="stylesheet" th:href="@{/editormd/css/editormd.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/tagsinput/jquery.tagsinput.css}" />
+
+    <script th:src="@{/editormd/js/editormd.min.js}"></script>
+    <script th:src="@{/tagsinput/jquery.tagsinput.js}"></script>
+</head>
+<body>
+<!-- Wrapper -->
+<div class="wrapper style1">
+    <div th:replace="public/header :: header"></div>
+    <!-- Page -->
+    <div id="page" class="container">
+        <form id="blog" class="blog-edit-form">
+            <input th:type="hidden" name="id" th:value="${blog?.id}"/>
+            <select name="categoryId" class="blog-edit-select">
+                <option th:if="null != categories" th:each="category:${categories}"
+                        th:value="${category?.id}"
+                        th:text="${category?.content}"
+                        th:selected="${blog?.categoryId eq category.id}">
+                </option>
+            </select>
+            <input  name="title" class="blog-edit-title" placeholder="标题:我在这呢"
+                    th:type="text" th:value="${blog?.title}"/>
+            <input name="labels" id="labels" th:value="${blog?.labels}" />
+        </form>
+        <div id="editormd-container">
+            <textarea id="editormd-content" name="editormd-content" style="display:none;"
+                      th:text="${blog?.sourceContent}"></textarea>
+            </textarea>
+        </div>
+    </div>
+
+    <a id="submit" href="javascript:void(0);" class="more button">Submit</a>
+</div>
+<!-- Copyright -->
+<div th:replace="public/copyright :: copyright"></div>
+</body>
+
+<script type="text/javascript">
+    $(function () {
+        // 初始化editormd
+        let editormdObj = editormd("editormd-container", {//注意1：这里的就是上面的DIV的id属性值
+            width: "90%",
+            height: 640,
+            syncScrolling: "single",
+            path: "/editormd/lib/",//注意2：你的路径
+            saveHTMLToTextarea: true,//注意3：这个配置，方便post提交表单
+            //watch : false,                // 关闭实时预览
+            // toolbar  : false,             //关闭工具栏
+        });
+        // 初始化tagsinput
+        $('#labels').tagsInput();
+
+        $("#submit").click(function () {
+            let editorPreviewContainer = $(".editormd-preview-container")[0];
+            let htmlCode = editorPreviewContainer.innerHTML;
+            let sourceCode = editormdObj.getMarkdown();
+            let plainCode = editorPreviewContainer.innerText;
+            let url = "/blogs/";
+            let blogData = $("#blog").serializeArray();
+            // $('#labels').val();
+
+            blogData.push({"name": "content", "value": htmlCode});
+            blogData.push({"name": "sourceContent", "value": sourceCode});
+            blogData.push({"name": "plainContent", "value": plainCode});
+            $.post(
+                url,
+                blogData,
+                function (res) {
+                    if ("00" === res.code) {
+                        alert("保存成功");
+                        window.location.href = "/blogs/";
+                    }
+                }
+            );
+        });
+    });
+</script>
+</html>

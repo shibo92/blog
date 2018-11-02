@@ -2,10 +2,6 @@ server:
   port: 8080
 
 spring:
-  application:
-    name: blog
-  profiles:
-    active: dev
   jpa:
     hibernate:
       ddl-auto: update

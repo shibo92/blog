@@ -13,6 +13,3 @@ spring:
     mode: HTML5
     encoding: utf-8
     cache: false
-feign:
-  hystrix:
-    enabled: true

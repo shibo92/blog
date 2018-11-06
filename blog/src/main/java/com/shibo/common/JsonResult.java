@@ -11,6 +11,17 @@ public class JsonResult {
     public JsonResult() {
     }
 
+    public JsonResult(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public JsonResult(String code, String message, Object data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
     public Object getData() {
         return data;
     }

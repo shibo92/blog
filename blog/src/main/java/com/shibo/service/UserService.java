@@ -23,4 +23,8 @@ public class UserService {
     public User findById(Integer id){
         return userDao.findById(id).orElse(new User());
     }
+
+    public User findByToken(String token){
+        return userDao.findByToken(token);
+    }
 }

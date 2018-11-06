@@ -32,4 +32,5 @@ public class User implements Serializable {
 
     private Integer isDel;
 
+    private String token;
 }

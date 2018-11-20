@@ -3,10 +3,6 @@ spring:
     active: dev
   application:
     name: blog
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://eureka-server:8761/eureka/
 ---
 spring:
   profiles: dev
@@ -16,6 +12,11 @@ spring:
       discovery:
         enabled: true #开启Config服务发现支持
         service-id: config-server #config server端的application name
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+
 ---
 spring:
   profiles: pro
@@ -25,3 +26,7 @@ spring:
       discovery:
         enabled: true #开启Config服务发现支持
         service-id: config-server #config server端的application name
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/

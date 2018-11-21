@@ -46,6 +46,7 @@
         <mysql.connector.version>6.0.6</mysql.connector.version>
         <commons-lang3.version>3.4</commons-lang3.version>
         <alibaba.fastjson.version>1.2.9</alibaba.fastjson.version>
+        <spring-retry.version>1.2.2.RELEASE</spring-retry.version>
         <!-- 布局功能的支持程序  thymeleaf3主程序  layout2以上版本 -->
         <!-- thymeleaf2   layout1-->
         <thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
@@ -87,6 +88,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+            <version>${spring-retry.version}</version>
         </dependency>
 
         <dependency>

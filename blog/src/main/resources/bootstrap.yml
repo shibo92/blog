@@ -12,6 +12,12 @@ spring:
       discovery:
         enabled: true #开启Config服务发现支持
         service-id: config-server #config server端的application name
+      failFast: true
+      retry:
+        initialInterval: 3000
+        multiplier: 1.3
+        maxInterval: 5000
+        maxAttempts: 20
 eureka:
   instance:
     hostname: localhost
@@ -27,6 +33,11 @@ spring:
       discovery:
         enabled: true #开启Config服务发现支持
         service-id: config-server #config server端的application name
+      retry:
+        initialInterval: 3000
+        multiplier: 1.3
+        maxInterval: 5000
+        maxAttempts: 20
 eureka:
   instance:
     hostname: eureka-server

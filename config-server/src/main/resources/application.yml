@@ -1,7 +1,8 @@
 server:
   port: 8080
-
 spring:
+  profiles:
+    active: dev
   application:
     name: config-server
   cloud:
@@ -11,8 +12,21 @@ spring:
           uri: https://github.com/shibo92/blog.git
           search-paths: config-repo/conf
           force-pull: true
-
+---
+spring:
+  profiles: dev
 eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+---
+spring:
+  profiles: pro
+eureka:
+  instance:
+    hostname: eureka-server
   client:
     serviceUrl:
       defaultZone: http://eureka-server:8761/eureka/

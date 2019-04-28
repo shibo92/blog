@@ -1,5 +1,5 @@
 server:
-  port: 8761
+  port: 8762
 spring:
   profiles:
     active: dev
@@ -8,21 +8,21 @@ spring:
   profiles: dev
 eureka:
   instance:
-    hostname: localhost-01
+    hostname: localhost-02
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       ## 将自己注册到另一台eureka上
-      defaultZone: http://eureka-server:8762/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 ---
 spring:
   profiles: pro
 eureka:
   instance:
-    hostname: eureka-server-01
+    hostname: eureka-server-02
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://eureka-server:8762/eureka/
+      defaultZone: http://eureka-server:8761/eureka/

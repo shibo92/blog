@@ -1,5 +1,6 @@
 package com.shibo.service;
 
+import com.shibo.common.Constants;
 import com.shibo.dao.BlogDao;
 import com.shibo.entity.Blog;
 import com.shibo.entity.PageDefault;
@@ -8,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -16,6 +19,7 @@ import javax.persistence.criteria.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author shibo
@@ -30,12 +34,21 @@ public class BlogService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     public void save(Blog blog) {
         blogDao.save(blog);
     }
 
     public Blog findById(Integer id) {
-        return blogDao.findById(id).orElse(new Blog());
+        final String blogKey = Constants.REDIS_KEY_BLOG + ":" + id;
+        Blog blog = (Blog) redisTemplate.opsForValue().get(blogKey);
+        if (null == blog) {
+            blog = blogDao.findById(id).orElse(new Blog());
+            redisTemplate.opsForValue().set(blogKey, blog, Constants.REDIS_EXPIRE_30_SECOND, TimeUnit.SECONDS);
+        }
+        return blog;
     }
 
     public Page<Blog> list(String keyword, Integer page) {
@@ -75,7 +88,7 @@ public class BlogService {
         String[] labels = blog.getLabels().split(",");
         StringBuilder sql = new StringBuilder("SELECT blog.id, blog.title from t_blog blog where blog.is_del = 0 ");
         for (int i = 0; i < labels.length; i++) {
-            if(i == 0){
+            if (i == 0) {
                 sql.append("AND");
             } else {
                 sql.append("OR");

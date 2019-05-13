@@ -6,4 +6,9 @@ spring:
     url: jdbc:mysql://localhost:3306/newblog?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: 
-
+  #activemq
+  activemq:
+    broker-url: tcp://eureka-server:61616
+    in-memory: true
+    pool:
+      enabled: false

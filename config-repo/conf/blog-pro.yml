@@ -4,7 +4,7 @@ spring:
     url: jdbc:mysql://mysql:3306/newblog
     username: root
     password: root
-    #activemq
+  #activemq
   activemq:
     broker-url: tcp://eureka-server:61616
     in-memory: true

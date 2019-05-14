@@ -21,9 +21,6 @@ spring:
 eureka:
   instance:
     hostname: localhost
-    health-check-url-path: /actuator/health
-    metadata-map:
-      startup: ${random.int}    #needed to trigger info and endpoint update after restart
   client:
     serviceUrl:
       defaultZone: http://eureka-server:8761/eureka/, http://eureka-server:8762/eureka/

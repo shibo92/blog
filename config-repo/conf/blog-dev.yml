@@ -31,4 +31,4 @@ spring:
     timeout: 10
   data:
     solr:
-      host: http://127.0.0.1:8983/solr/new_core
+      host: http://127.0.0.1:8983/#/solr/new_core

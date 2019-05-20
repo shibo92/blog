@@ -13,3 +13,11 @@ spring:
     mode: HTML5
     encoding: utf-8
     cache: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #<2>
+  endpoint:
+    health:
+      show-details: ALWAYS

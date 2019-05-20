@@ -29,3 +29,6 @@ spring:
         min-idle: 0
     # 连接超时时间（毫秒）
     timeout: 10
+  data:
+    solr:
+      host: http://127.0.0.1:8081/solr

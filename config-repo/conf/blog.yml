@@ -13,6 +13,7 @@ spring:
     mode: HTML5
     encoding: utf-8
     cache: false
+### admin-server
 management:
   endpoints:
     web:

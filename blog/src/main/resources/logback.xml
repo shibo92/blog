@@ -20,6 +20,19 @@
         </layout>
     </appender>
 
+    <!-- For sentry -->
+    <appender name="SentryAppender" class="io.sentry.logback.SentryAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <springProfile name="dev,pro">
+        <root level="INFO">
+            <appender-ref ref="SentryAppender"/>
+        </root>
+    </springProfile>
+
     <logger name="com.shibo" level="DEBUG"/>
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>

@@ -23,10 +23,6 @@ public class User implements Serializable {
 
     private String password;
 
-    private String question;
-
-    private String answer;
-
     @CreatedDate
     private Date regTime;
 

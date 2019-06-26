@@ -4,19 +4,19 @@ package com.shibo.common;
  * @author shibo
  */
 public class JsonResult {
-    private String code;
+    private int code;
     private String message;
     private Object data;
 
     public JsonResult() {
     }
 
-    public JsonResult(String code, String message) {
+    public JsonResult(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public JsonResult(String code, String message, Object data) {
+    public JsonResult(int code, String message, Object data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -30,11 +30,11 @@ public class JsonResult {
         this.data = data;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -59,13 +59,13 @@ public class JsonResult {
     }
 
 
-    public void setInfo(String code, String message, Object data) {
+    public void setInfo(int code, String message, Object data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public void setInfo(String code, String message) {
+    public void setInfo(int code, String message) {
         this.code = code;
         this.message = message;
     }

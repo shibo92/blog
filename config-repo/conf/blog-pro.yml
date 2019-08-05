@@ -1,7 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:33060/newblog
+#    url: jdbc:mysql://mysql:33060/newblog
+    url: jdbc:mysql://eureka-server:33060/newblog
     username: root
     password: root
   #activemq

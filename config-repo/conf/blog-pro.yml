@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://mysql:33060/newblog
     username: root
-    password:
+    password: root
   #activemq
   activemq:
     broker-url: tcp://eureka-server:61616

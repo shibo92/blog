@@ -1,0 +1,56 @@
+version: '3'
+services:
+  mysql:
+    image: walleeee/mysql:5.7
+    container_name: mysql
+    volumes:
+     - "./data/mysql/data:/var/lib/mysql"
+    networks:
+     - eureka-net
+    ports:
+     - 33060:3306
+       
+  eureka-server:
+    image: walleeee/register:latest
+    container_name: register
+    restart: always
+    networks:
+      - eureka-net
+    extra_hosts:
+      - "eureka-server:10.8.8.64"
+    ports:
+      - 8761:8761
+    environment:
+      - "SPRING_PROFILES_ACTIVE=pro"
+
+  config-server:
+    image: walleeee/config-server:latest
+    container_name: config-server
+    networks:
+      - eureka-net
+    extra_hosts:
+      - "eureka-server:10.8.8.64"
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - "SPRING_PROFILES_ACTIVE=pro"
+
+  blog:
+    image: walleeee/blog:latest
+    container_name: blog
+    depends_on:
+      - mysql
+    networks:
+      - eureka-net
+    extra_hosts:
+      - "eureka-server:10.8.8.64"
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - "SPRING_PROFILES_ACTIVE=pro"
+     
+networks:
+  eureka-net:
+    driver: bridge

@@ -1,5 +1,6 @@
 package com.shibo.service;
 
+import com.shibo.Exception.BlogNotFoundException;
 import com.shibo.common.Constants;
 import com.shibo.dao.BlogDao;
 import com.shibo.entity.Blog;
@@ -41,11 +42,14 @@ public class BlogService {
         blogDao.save(blog);
     }
 
-    public Blog findById(Integer id) {
+    public Blog findById(Integer id) throws Exception {
         final String blogKey = Constants.REDIS_KEY_BLOG + ":" + id;
         Blog blog = (Blog) redisTemplate.opsForValue().get(blogKey);
         if (null == blog) {
-            blog = blogDao.findById(id).orElse(new Blog());
+            blog = blogDao.findById(id).orElse(null);
+            if(null == blog){
+                throw new BlogNotFoundException(id);
+            }
             redisTemplate.opsForValue().set(blogKey, blog, Constants.REDIS_EXPIRE_30_SECOND, TimeUnit.SECONDS);
         }
         return blog;

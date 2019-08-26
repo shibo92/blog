@@ -28,7 +28,7 @@ public class BlogController {
     private CategoryService categoryService;
 
     @GetMapping("/{blogId}")
-    public String get(@PathVariable(value = "blogId") Integer blogId, Map<String, Object> map) {
+    public String get(@PathVariable(value = "blogId") Integer blogId, Map<String, Object> map) throws Exception {
         Blog blog = blogService.findById(blogId);
         map.put("blog", blog);
         map.put("relates", blogService.findByLabels(blog));
@@ -36,7 +36,7 @@ public class BlogController {
     }
 
     @GetMapping("/{blogId}/edit")
-    public String toUpdate(@PathVariable(value = "blogId") Integer blogId, Map<String, Object> map) {
+    public String toUpdate(@PathVariable(value = "blogId") Integer blogId, Map<String, Object> map) throws Exception {
         map.put("blog", blogService.findById(blogId));
         map.put("categories", categoryService.list());
         return "blog/edit";
@@ -66,9 +66,16 @@ public class BlogController {
 
     @GetMapping(value = {"/doList"})
     @ResponseBody
-    public JsonResult doList(@RequestParam(value = "keyword", required = false) String keyword,
+    public Page<Blog> doList(@RequestParam(value = "keyword", required = false) String keyword,
                            @RequestParam(value = "page", required = false) Integer page) {
         Page<Blog> blogs = blogService.list(keyword, page);
-        return JsonResult.getSuccessfulResult(blogs);
+        return blogs;
+    }
+
+    @GetMapping("/{blogId}/test")
+    @ResponseBody
+    public Blog getTest(@PathVariable(value = "blogId") Integer blogId) throws Exception {
+        Blog blog = blogService.findById(blogId);
+        return blog;
     }
 }

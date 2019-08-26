@@ -23,6 +23,12 @@ public class GlobalResultConfig {
     static class ResultResponseAdvice implements ResponseBodyAdvice<Object> {
         @Override
         public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+            /*//获取当前处理请求的controller的方法
+            String methodName=returnType.getMethod().getName();
+            // 不拦截/不需要处理返回值 的方法
+            String method= "login"; //如登录
+            // false不拦截(不执行beforeBodyWrite方法), true拦截
+            return !method.equals(methodName);*/
             return true;
         }
 

@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
     /**
      * 全局异常处理
      */

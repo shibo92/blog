@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -59,7 +60,9 @@ public class BlogService {
         page = null == page ? 0 : page;
         return blogDao.findAll(this.getListSpecification(null, keyword), new PageDefault(page));
     }
-
+    public List<Blog> list2(String keyword, Integer page) {
+        return new ArrayList<>();
+    }
     public Page<Blog> listByCategory(Integer categoryId, String keyword, Integer page) {
         page = null == page ? 0 : page;
         return blogDao.findAll(this.getListSpecification(categoryId, keyword), new PageDefault(page));

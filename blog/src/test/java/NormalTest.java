@@ -50,6 +50,6 @@ public class NormalTest {
         User u = userService.findByToken("1");
         Assert.assertNotNull("返回成功", u);
         User u2 = userService.findByToken("1");
-        Assert.assertNotNull("返回失败3", u2);
+        Assert.assertNotNull("返回失败", u2);
     }
 }

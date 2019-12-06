@@ -18,6 +18,10 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
+
+    @Autowired
+    private BlogService blogService;
+
     public void save(User user) {
         userDao.save(user);
         userDao.flush();

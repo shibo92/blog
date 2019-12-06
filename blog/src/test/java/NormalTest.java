@@ -1,4 +1,3 @@
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.shibo.dao.BlogDao;
 import com.shibo.dao.UserDao;
@@ -43,11 +42,7 @@ public class NormalTest {
             {
                 userDao.findByToken(String.valueOf(anyInt));
                 result = new User();
-            }
-        };
-        new Expectations() {
-            {
-                userDao.findByToken(String.valueOf(anyInt));
+                userDao.findByToken(anyString);
                 result = new User();
             }
         };
@@ -56,12 +51,5 @@ public class NormalTest {
         Assert.assertNotNull("返回成功", u);
         User u2 = userService.findByToken("1");
         Assert.assertNotNull("返回失败3", u2);
-    }
-
-    @Test
-    public void test(){
-        List<Date> orderList = new ArrayList<>();
-        orderList.add(new Date());
-        System.out.println(JSONObject.toJSONString(orderList));
     }
 }

@@ -1,4 +1,5 @@
 import com.alibaba.fastjson.JSONObject;
+import com.shibo.annotation.HandleUserType;
 import com.shibo.dao.BlogDao;
 import com.shibo.dao.UserDao;
 import com.shibo.entity.*;
@@ -51,5 +52,10 @@ public class NormalTest {
         Assert.assertNotNull("返回成功", u);
         User u2 = userService.findByToken("1");
         Assert.assertNotNull("返回失败", u2);
+    }
+
+    @Test
+    public void testGetAnnotationParam(){
+        HandleUserType.getUserType();
     }
 }

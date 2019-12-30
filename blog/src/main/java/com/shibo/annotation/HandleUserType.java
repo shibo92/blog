@@ -60,7 +60,7 @@ public class HandleUserType {
     }
 
     private static String getAnnotationDesc(String packageName, String className) {
-        // 这里用class.forName不会触发static方法，改用loadClass
+        // 这里用class.forName会触发static方法，改用loadClass
         //Class.forName(packageName + '.' +className)
         Class<?> clazz = null;
         try {

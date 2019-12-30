@@ -21,6 +21,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.validation.constraints.AssertTrue;
 import java.util.*;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyList;
@@ -57,5 +58,10 @@ public class NormalTest {
     @Test
     public void testGetAnnotationParam(){
         HandleUserType.getUserType();
+    }
+
+    @Test
+    public void testThreadPool(){
+        // ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor();
     }
 }

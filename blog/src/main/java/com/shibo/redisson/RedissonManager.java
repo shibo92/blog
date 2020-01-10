@@ -1,4 +1,4 @@
-package com.daojia.user.recruit.util;
+package com.shibo.redisson;
 
 import org.redisson.Config;
 import org.redisson.Redisson;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.ResourceUtils;
 
 /**
- * @author: yangjianbo
+ * @author: shibo
  * @Date: Created in 2019/10/30 20:46
  */
 public class RedissonManager {

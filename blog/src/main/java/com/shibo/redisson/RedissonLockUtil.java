@@ -1,4 +1,4 @@
-package com.shibo.utils;
+package com.shibo.redisson;
 
 import org.redisson.Redisson;
 import org.redisson.core.RLock;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: yangjianbo
+ * @author: shibo
  * @Date: Created in 2019/10/30 20:43
  */
 public class RedissonLockUtil {

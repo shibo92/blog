@@ -23,7 +23,7 @@ public class RedissonManager {
         logger.info("init redisson ...");
         Config config = null;
         try {
-            config = Config.fromJSON(ResourceUtils.getFile("classpath:config/redisson.properties"));
+            config = Config.fromJSON(ResourceUtils.getFile("classpath:config/redisson-config.yml"));
         } catch (Exception e) {
             logger.error("RedissonClient init failed !", e);
         }

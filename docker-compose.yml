@@ -17,7 +17,7 @@ services:
     networks:
       - eureka-net
     extra_hosts:
-      - "eureka-server:10.8.8.64"
+      - "eureka-server:10.253.102.102"
     ports:
       - 8761:8761
     environment:
@@ -29,27 +29,27 @@ services:
     networks:
       - eureka-net
     extra_hosts:
-      - "eureka-server:10.8.8.64"
+      - "eureka-server:10.253.102.102"
     restart: always
     ports:
       - 8080:8080
     environment:
       - "SPRING_PROFILES_ACTIVE=pro"
 
-  blog:
-    image: walleeee/blog:latest
-    container_name: blog
-    depends_on:
-      - mysql
-    networks:
-      - eureka-net
-    extra_hosts:
-      - "eureka-server:10.8.8.64"
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      - "SPRING_PROFILES_ACTIVE=pro"
+  # blog:
+  #   image: walleeee/blog:latest
+  #   container_name: blog
+  #   depends_on:
+  #     - mysql
+  #   networks:
+  #     - eureka-net
+  #   extra_hosts:
+  #     - "eureka-server:10.8.8.64"
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     - "SPRING_PROFILES_ACTIVE=pro"
      
 networks:
   eureka-net:
